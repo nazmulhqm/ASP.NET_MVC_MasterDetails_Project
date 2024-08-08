@@ -1,0 +1,87 @@
+﻿@model MVCProject_Nazmul.Models.Order
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<script src="~/Scripts/jquery-1.9.1.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#orderInfo").click(function () {
+            $.ajax({
+                url: "@Url.Action("OrderDetails", "Order", new {id = @Model.OrderId})",
+                type: "get",
+                dataType: "json",
+                success: function (result) {
+                    $("#orderDisplay table tbody").empty();
+                    for (var i = 0; i < result.length; i++) {
+                        $("#orderDisplay table tbody").append("<tr><td>" + result[i].productName + "</td><td>" + result[i].quantity + "</td><td>" + result[i].unitPrice + "</td><td>" + result[i].totalPrice + "</td></tr>");
+                    }
+                    $("#orderDisplay").show();
+                }
+            });
+            this.disabled = true;
+        });
+    });
+</script>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-10">
+            <fieldset>
+                <legend>Order</legend>
+                <span class="display-label">
+                    @Html.DisplayNameFor(model => model.Customer.CustomerName) :
+                </span>
+                <span class="display-field">
+                    @Html.DisplayFor(model => model.Customer.CustomerName)
+                </span>
+                <br />
+                <span class="display-label">
+                    @Html.DisplayNameFor(model => model.OrderDate) :
+                </span>
+                <span class="display-field">
+                    @Html.DisplayFor(model => model.OrderDate)
+                </span>
+                <br />
+                <span class="display-label">
+                    @Html.DisplayNameFor(model => model.Note) :
+                </span>
+                <span class="display-field">
+                    @Html.DisplayFor(model => model.Note)
+                </span>
+            </fieldset>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-actions no-color">
+                    <input type="submit" value="Delete" class="btn btn-default" /> |
+                    @Html.ActionLink("Back to List", "Index")
+                </div>
+            }
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div>
+                <button class="btn btn-info" id="orderInfo" data-order-id="@Model.OrderId">Order Details</button>
+            </div>
+            <div id="orderDisplay" style="display:none">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Quantity</th>
+                            <th>Unit Price</th>
+                            <th>Total Price</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

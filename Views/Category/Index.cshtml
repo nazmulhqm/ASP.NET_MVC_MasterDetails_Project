@@ -1,0 +1,263 @@
+﻿@model IEnumerable<MVCProject_Nazmul.Models.Category>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-theme.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    @*<script src="~/Scripts/jquery-1.9.1.min.js"></script>*@
+    <script src="~/Scripts/bootstrap.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            $("#Add").click(function () {
+                $("#Add-Modal").modal("show");
+            });
+
+            $("#Add").click(function (event) {
+                event.preventDefault();
+                $.get(this.href, function (response) {
+                    $(".divForAdd").html(response);
+
+                });
+                $("#Add-Modal").modal({
+                    backdrop: "static",
+                }, 'show');
+            });
+
+            $(".editDialog").click(function (event) {
+                event.preventDefault();
+                var url = $(this).attr("href"); // Get the URL from the Edit button
+                $.get(url, function (response) {
+                    $(".divForUpdate").html(response);
+                    $("#Edit-Modal").modal("show"); // Show the modal after loading content
+                });
+            });
+
+            $(".DetailsDialog").click(function (event) {
+                event.preventDefault();
+                var url = $(this).attr("href"); // Get the URL from the Details button
+                $.get(url, function (response) {
+                    $(".divForDetails").html(response);
+                    $("#Details-Modal").modal("show"); // Show the modal after loading content
+                });
+            });
+
+
+            $(".DeleteDialog").click(function (event) {
+                event.preventDefault();
+                var url = $(this).attr("href"); // Get the URL from the Delete button
+                $.get(url, function (response) {
+                    $(".divForDelete").html(response);
+                    $("#Delete-Modal").modal("show"); // Show the modal after loading content
+                });
+            });
+        });
+    </script>
+
+</head>
+<body>
+    <div id="main-div">
+        <div class=container>
+            <br/>
+            <p>
+                @Html.ActionLink("Add Category", "Create", "Category", null, new { @class = "btn btn-primary", id = "Add" })
+
+            </p>
+            <div id="div-record">
+                <table class="table">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CategoryName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CategoryDescription)
+                        </th>
+                        <th></th>
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CategoryName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CategoryDescription)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.CategoryId }, new { @class = "btn btn-sm btn-warning editDialog" }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.CategoryId }, new { @class = "btn btn-sm btn-info DetailsDialog" }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.CategoryId }, new { @class = "btn btn-sm btn-danger DeleteDialog" })
+
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            </div>
+        </div>
+
+
+
+        <div class="modal fade" id="Add-Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title"> New Category</h4>
+                    </div>
+                    <div class="divForAdd">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="modal fade" id="Edit-Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title"> Update Category Information</h4>
+                    </div>
+                    <div class="divForUpdate">
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+        </div>
+
+
+        <div class="modal fade" id="Details-Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabelDetails" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Category Details </h4>
+                    </div>
+                    <div class="divForDetails">
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="modal fade" id="Delete-Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal fade" id="Add-Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title"> Delete Category</h4>
+                    </div>
+                    <div class="divForAdd">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="modal fade" id="Edit-Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title"> Update Category Information</h4>
+                    </div>
+                    <div class="divForUpdate">
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+        </div>
+
+
+        <div class="modal fade" id="Details-Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabelDetails" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Supplier Details </h4>
+                    </div>
+                    <div class="divForDetails">
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="modal fade" id="Delete-Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Delete Supplier Info</h4>
+                    </div>
+                    <div class="divForDelete">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Delete Supplier Info</h4>
+                    </div>
+                    <div class="divForDelete">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</body>
+</html>
