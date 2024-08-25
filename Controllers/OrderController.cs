@@ -17,11 +17,11 @@ namespace MVCProject_Nazmul.Controllers
         // GET: Order
         public ApplicationDbContext db = new ApplicationDbContext();
 
-        public ActionResult Index(string sortOrder, string searchString, string currentFilter, int? page,int? pageSize)
+        public ActionResult Index(string sortOrder, string searchString, string currentFilter, int? page, int? pageSize)
         {
             ViewBag.CurrentSort = sortOrder;
             ViewBag.NameSortParam = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewBag.PageSize = new SelectList(new List<int> { 10, 20, 50 }, pageSize ?? 2); // Dropdown list options
+            ViewBag.PageSize = new SelectList(new List<int> { 5, 10, 20, 50 }, pageSize ?? 10); 
 
             if (searchString != null)
             {
@@ -53,7 +53,7 @@ namespace MVCProject_Nazmul.Controllers
             }
 
             int pageNumber = (page ?? 1);
-            int pageSizeValue = pageSize ?? 2; // Default page size is 2
+            int pageSizeValue = pageSize ?? 10; 
 
             return View(orders.ToPagedList(pageNumber, pageSizeValue));
 

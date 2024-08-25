@@ -1,5 +1,4 @@
-﻿@*@model IEnumerable<MVCProject_Nazmul.Models.Order>*@
-
+﻿
 @model PagedList.IPagedList<MVCProject_Nazmul.Models.Order>
 @using PagedList.Mvc;
 @using MVCProject_Nazmul.Helpers;
@@ -26,11 +25,6 @@
 </div>
 
 
-@*@using (Html.BeginForm())
-    {
-        <p>Find By Name: @Html.TextBox("searchString")</p>
-        <input type="submit" value="Search" , class = "btn btn-info" />
-    }*@
 <br/>
 <br/>
 @using (Html.BeginForm())
