@@ -1,4 +1,5 @@
 ﻿using MVCProject_Nazmul.Models;
+using MVCProject_Nazmul.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -18,17 +19,18 @@ namespace MVCProject_Nazmul.Controllers
         public ActionResult Index()
         {
             var productsWithCategories = db.Products
-    .Join(db.Categories, // Inner join Products and Categories tables
-          product => product.CategoryId, // Join on Product's CategoryId
-          category => category.CategoryId, // Join on Category's CategoryId
-          (product, category) => new // Select result
-          {
-              ProductId = product.ProductId,
-              ProductName = product.ProductName,
-              ProductDescription = product.ProductDescription,
-              CategoryName = category.CategoryName
-          })
-    .ToList();
+                    .Join(db.Categories,
+                        product => product.CategoryId,
+                        category => category.CategoryId,
+                        (product, category) => new ProductViewModel
+                        {
+                            ProductId = product.ProductId,
+                            ProductName = product.ProductName,
+                            ProductDescription = product.ProductDescription,
+                            CategoryName = category.CategoryName
+                        })
+                    .ToList();
+
             return View(productsWithCategories);
         }
 

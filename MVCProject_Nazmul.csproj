@@ -235,6 +235,7 @@
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\ViewModels\ManageUserRolesViewModel.cs" />
     <Compile Include="Models\ViewModels\OrderViewModel.cs" />
+    <Compile Include="Models\ViewModels\ProductViewModel.cs" />
     <Compile Include="Models\ViewModels\UserViewModel.cs" />
     <Compile Include="Permissions\CustomClaimTypes.cs" />
     <Compile Include="Permissions\ManageUserClaimViewModel.cs" />
@@ -367,6 +368,9 @@
     <Content Include="Views\Order\Delete.cshtml" />
     <Content Include="Views\Order\Details.cshtml" />
     <Content Include="Views\Order\Index.cshtml" />
+    <Content Include="Views\Product\Details.cshtml" />
+    <Content Include="Views\Product\Create.cshtml" />
+    <Content Include="Views\Product\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Images\" />
