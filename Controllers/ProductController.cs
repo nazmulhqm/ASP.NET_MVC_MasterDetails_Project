@@ -27,6 +27,7 @@ namespace MVCProject_Nazmul.Controllers
                             ProductId = product.ProductId,
                             ProductName = product.ProductName,
                             ProductDescription = product.ProductDescription,
+                            UnitPrice = product.UnitPrice,
                             CategoryName = category.CategoryName
                         })
                     .ToList();
@@ -91,7 +92,7 @@ namespace MVCProject_Nazmul.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProductId,ProductName,ProductDescription,CategoryId")] Product product)
+        public ActionResult Edit([Bind(Include = "ProductId,ProductName,ProductDescription,CategoryId,UnitPrice")] Product product)
         {
             if (ModelState.IsValid)
             {

@@ -20,6 +20,9 @@
         <th>
             Category Name
         </th>
+        <th>
+            Unit Price
+        </th>
         <th></th>
     </tr>
 
@@ -33,6 +36,9 @@
         </td>
         <td>
             @item.CategoryName
+        </td>
+        <td>
+            @item.UnitPrice
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ProductId }) |

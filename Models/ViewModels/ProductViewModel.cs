@@ -16,7 +16,11 @@ namespace MVCProject_Nazmul.Models.ViewModels
         [Display(Name = "Product Description")]
         public string ProductDescription { get; set; }
 
+        [Display(Name = "Unit Price")]
+        public decimal UnitPrice { get; set; }
+
         [Display(Name = "Category Name")]
         public string CategoryName { get; set; }
+
     }
 }
